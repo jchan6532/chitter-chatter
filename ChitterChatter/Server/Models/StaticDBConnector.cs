@@ -42,10 +42,10 @@ namespace Server.Models
 
         public static Int64 GetCount(string table, string column, string whereClause)
         {
-            string query = string.Format("SELECT COUNT({0}) FROM {1} WHERE {2}", column, table, whereClause);
+            string query = string.Format("SELECT COUNT({0}) FROM {1} WHERE {2};", column, table, whereClause);
             if (string.IsNullOrEmpty(whereClause) == true)
             {
-                query = string.Format("SELECT COUNT({0}) FROM {1}", column, table);
+                query = string.Format("SELECT COUNT({0}) FROM {1};", column, table);
             }
             StaticDBConnector.command.CommandType = CommandType.Text;
             StaticDBConnector.command.CommandText = query;
@@ -63,6 +63,33 @@ namespace Server.Models
             }
             Int64 count = StaticDBConnector.table.Rows[0].Field<Int64>(string.Format("count({0})", column));
             return count;
+        }
+
+        public static object GetFieldFromEntry(string table, string column, string whereClause)
+        {
+            string query = string.Format("SELECT {0} FROM {1} WHERE {2};", column, table, whereClause);
+
+            StaticDBConnector.command.CommandType = CommandType.Text;
+            StaticDBConnector.command.CommandText = query;
+
+            StaticDBConnector.command.ExecuteNonQuery();
+            StaticDBConnector.adapter = new MySqlDataAdapter(StaticDBConnector.command);
+            try
+            {
+                StaticDBConnector.table.Clear();
+                StaticDBConnector.adapter.Fill(StaticDBConnector.table);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            object field = StaticDBConnector.table.Rows[0].Field<object>(column);
+            return field;
+        }
+
+        public static int CheckLoginCredentials(string enteredUserName, string enteredPassword)
+        {
+            Int64 count = StaticDBConnector.GetCount()
         }
     }
 }
