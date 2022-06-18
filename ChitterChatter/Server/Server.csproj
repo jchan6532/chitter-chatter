@@ -104,5 +104,11 @@
     <Folder Include="Controllers\" />
     <Folder Include="Views\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Constants\Constants.csproj">
+      <Project>{cac81a1f-d50d-4b14-a59a-bf58ca2f755f}</Project>
+      <Name>Constants</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
