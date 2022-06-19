@@ -8,10 +8,13 @@ CREATE TABLE IF NOT EXISTS users (
   `userName` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
   `isAdmin` TINYINT(1) NOT NULL,
+  `firstName` VARCHAR(45) NOT NULL,
+  `lastName` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`userID`),
   UNIQUE INDEX `userID_UNIQUE` (`userID` ASC) VISIBLE,
   UNIQUE INDEX `userName_UNIQUE` (`userName` ASC) VISIBLE);
-INSERT INTO users (userID, userName, password, isAdmin) VALUES(1, 'ADMIN', 'ADMIN', 1);
+
+INSERT INTO users (userID, userName, password, isAdmin, firstName, lastName) VALUES(1, 'ADMIN', 'ADMIN', 1, 'first', 'last');
 
 # MESSAGE TABLE
 CREATE TABLE IF NOT EXISTS messages (
