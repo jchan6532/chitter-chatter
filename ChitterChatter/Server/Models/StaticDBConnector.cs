@@ -29,6 +29,7 @@ namespace Server.Models
             string server = ConfigurationManager.AppSettings.Get("Server");
             string port = ConfigurationManager.AppSettings.Get("DBPort");
             connectionString = string.Format("server={0}; port={1}; userid={2}; password={3}; database={4};", server, port, userName, password, database);
+            StaticDBConnector.connection = new MySqlConnection();
             StaticDBConnector.connection.ConnectionString = connectionString;
 
             try
@@ -145,7 +146,7 @@ namespace Server.Models
         public static void Read(string tableName, string whereClause)
         {
 
-            string query = string.Format("SELECT * FROM {1} WHERE {2};", tableName, whereClause;
+            string query = string.Format("SELECT * FROM {1} WHERE {2};", tableName, whereClause);
 
             StaticDBConnector.command.CommandType = CommandType.Text;
             StaticDBConnector.command.CommandText = query;
