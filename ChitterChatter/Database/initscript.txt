@@ -1,0 +1,33 @@
+DROP DATABASE IF EXISTS chitterchatter;
+CREATE DATABASE chitterchatter;
+USE chitterchatter;
+
+# USER TABLE
+CREATE TABLE IF NOT EXISTS users (
+  `userID` INT NOT NULL AUTO_INCREMENT,
+  `userName` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `isAdmin` TINYINT(1) NOT NULL,
+  `firstName` VARCHAR(45) NOT NULL,
+  `lastName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`userID`),
+  UNIQUE INDEX `userID_UNIQUE` (`userID` ASC) VISIBLE,
+  UNIQUE INDEX `userName_UNIQUE` (`userName` ASC) VISIBLE);
+
+INSERT INTO users (userID, userName, password, isAdmin, firstName, lastName) VALUES(1, 'ADMIN', 'ADMIN', 1, 'first', 'last');
+
+# MESSAGE TABLE
+CREATE TABLE IF NOT EXISTS messages (
+  `messageID` int NOT NULL AUTO_INCREMENT,
+  `contents` longtext NOT NULL,
+  `senderID` int NOT NULL,
+  `receiverID` int NOT NULL,
+  `time` datetime NOT NULL,
+  PRIMARY KEY (`messageID`),
+  UNIQUE KEY `messageID_UNIQUE` (`messageID`),
+  KEY `userID_idx` (`senderID`,`receiverID`),
+  KEY `receiverUserID_idx` (`receiverID`),
+  KEY `senderID_idx` (`senderID`),
+  CONSTRAINT `receiverID` FOREIGN KEY (`receiverID`) REFERENCES `users` (`userID`),
+  CONSTRAINT `senderID` FOREIGN KEY (`senderID`) REFERENCES `users` (`userID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
