@@ -12,8 +12,9 @@ namespace Constants.Models
 
         public static string TABLENAME => "messages";
         public static string PK_COL => "messageID";
-        public static string CONTENT_COL => "content";
+        public static string CONTENT_COL => "contents";
         public static string SENDER_FK_COL => "senderID";
         public static string RECEIVER_FK_COL => "receiverID";
+        public static string TIME_COL => "time";
     }
 }

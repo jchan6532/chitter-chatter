@@ -28,7 +28,7 @@ namespace Server.Models
             string database = ConfigurationManager.AppSettings.Get("DataBase");
             string server = ConfigurationManager.AppSettings.Get("Server");
             string port = ConfigurationManager.AppSettings.Get("DBPort");
-            connectionString = string.Format("server={0}; port={1}; userid={2}; password={3}; database={4};", server, port, userName, password, database);
+            connectionString = $"server={server}; port={port}; userid={userName}; password={password}; database={database};";
             StaticDBConnector.connection = new MySqlConnection();
             StaticDBConnector.connection.ConnectionString = connectionString;
 
@@ -39,18 +39,17 @@ namespace Server.Models
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                connectionString = string.Empty;
+                throw e;
             }
             return connectionString;
         }
 
         public static Int64 GetCount(string table, string column, string whereClause)
         {
-            string query = string.Format("SELECT COUNT({0}) FROM {1} WHERE {2};", column, table, whereClause);
+            string query = $"SELECT COUNT({column}) FROM {table} WHERE {whereClause};";
             if (string.IsNullOrEmpty(whereClause) == true)
             {
-                query = string.Format("SELECT COUNT({0}) FROM {1};", column, table);
+                query = $"SELECT COUNT({column}) FROM {table};";
             }
             StaticDBConnector.command.CommandType = CommandType.Text;
             StaticDBConnector.command.CommandText = query;
@@ -66,13 +65,13 @@ namespace Server.Models
             {
                 Console.WriteLine(e.Message);
             }
-            Int64 count = StaticDBConnector.table.Rows[0].Field<Int64>(string.Format("count({0})", column));
+            Int64 count = StaticDBConnector.table.Rows[0].Field<Int64>($"count({column})");
             return count;
         }
 
         public static object GetFieldFromEntry(string table, string column, string whereClause)
         {
-            string query = string.Format("SELECT {0} FROM {1} WHERE {2};", column, table, whereClause);
+            string query = $"SELECT {column} FROM {table} WHERE {whereClause};";
 
             StaticDBConnector.command.CommandType = CommandType.Text;
             StaticDBConnector.command.CommandText = query;
@@ -135,7 +134,7 @@ namespace Server.Models
             }
             valueQuery = valueQuery.TrimEnd(',');
 
-            string query = string.Format("INSERT INTO {0} ({1}) VALUES ({2});", tableName, columnQuery, valueQuery);
+            string query = $"INSERT INTO {tableName} ({columnQuery}) VALUES ({valueQuery});";
 
             StaticDBConnector.command.CommandType = CommandType.Text;
             StaticDBConnector.command.CommandText = query;
@@ -147,7 +146,7 @@ namespace Server.Models
         public static void Read(string tableName, string whereClause)
         {
 
-            string query = string.Format("SELECT * FROM {1} WHERE {2};", tableName, whereClause);
+            string query = $"SELECT * FROM {tableName} WHERE {whereClause};";
 
             StaticDBConnector.command.CommandType = CommandType.Text;
             StaticDBConnector.command.CommandText = query;
@@ -167,7 +166,7 @@ namespace Server.Models
 
         public static void Update(string tableName, string whereClause, string updateClause)
         {
-            string query = string.Format("UPDATE {0} SET {1} WHERE {2};", tableName, updateClause, whereClause);
+            string query = $"UPDATE {tableName} SET {updateClause} WHERE {whereClause};";
 
             StaticDBConnector.command.CommandType = CommandType.Text;
             StaticDBConnector.command.CommandText = query;
@@ -177,7 +176,7 @@ namespace Server.Models
 
         public static void Delete(string tableName, string whereClause)
         {
-            string query = string.Format("DELETE FROM {0} WHERE {1};", tableName, whereClause);
+            string query = $"DELETE FROM {tableName} WHERE {whereClause};";
 
             StaticDBConnector.command.CommandType = CommandType.Text;
             StaticDBConnector.command.CommandText = query;

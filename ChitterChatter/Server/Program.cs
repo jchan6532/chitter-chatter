@@ -16,7 +16,7 @@ namespace Server
             try
             {
                 Controller.Server server = new Controller.Server();
-                //server.Start();
+                server.Start();
             }
             catch (Exception e)
             {

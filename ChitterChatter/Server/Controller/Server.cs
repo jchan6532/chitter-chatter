@@ -19,38 +19,54 @@ namespace Server.Controller
         public IPEndPoint localEP;
 
         public Dictionary<int, User> sessions;
+        public Dictionary<int, Mesagage> messages;
         public volatile bool done;
 
         public Server()
         {
             try
             {
+                Logger.Log("Server initiating", "ACTION");
+
                 this.iPAddress = IPAddress.Parse(ConfigurationManager.AppSettings.Get("LocalIP"));
                 this.port = Int32.Parse(ConfigurationManager.AppSettings.Get("LocalPort"));
                 this.localEP = new IPEndPoint(this.iPAddress, this.port);
                 this.listener = new TcpListener(this.localEP);
 
-                var s = StaticDBConnector.GetConnectionString();
-                if(string.IsNullOrEmpty(s) == true)
-                {
-                    throw new Exception("database failed to connect");
-                }
-
-                Mesagage.lastReadMessageID = 0;
+                string connectionStr = StaticDBConnector.GetConnectionString();
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
                 throw e;
             }
-
+ 
             this.sessions = new Dictionary<int, User>();
+
+            Mesagage.lastReadMessageID = 0;
+            this.messages = new Dictionary<int, Mesagage>();
+            try
+            {
+                int newID = 0;
+                do
+                {
+                    newID = (Int32)Mesagage.GetNextMessageID();
+                    this.messages.Add(newID, new Mesagage(newID));
+                } while (true);
+            }
+            catch (Exception e)
+            {
+                Logger.Log(e.Message, "EXCEPTION");
+            }
+
+
             this.done = false;
         }
         public void Start()
         {
             try
             {
+                Logger.Log("Server starting", "ACTION");
+
                 this.listener.Start();
                 while (this.done == false)
                 {
