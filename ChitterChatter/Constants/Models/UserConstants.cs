@@ -16,5 +16,7 @@ namespace Constants.Models
         public static string USERNAME_COL => "userName";
         public static string PASSWORD_COL => "password";
         public static string ISADMIN_COL => "isAdmin";
+        public static string FIRSTNAME_COL => "firstName";
+        public static string LASTNAME_COL => "lastName";
     }
 }

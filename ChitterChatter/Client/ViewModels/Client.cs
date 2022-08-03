@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.Models
+namespace Client.ViewModels
 {
-    public class Post
+    class Client
     {
-
     }
 }

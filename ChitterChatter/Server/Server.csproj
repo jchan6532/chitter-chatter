@@ -89,6 +89,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\Logger.cs" />
     <Compile Include="Controller\Server.cs" />
     <Compile Include="Models\Mesagage.cs" />
     <Compile Include="Models\Post.cs" />
