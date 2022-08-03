@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Server.Models
 {
-    class Post
+    public class Post
     {
+
     }
 }

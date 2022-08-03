@@ -40,6 +40,7 @@ namespace Server.Models
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                connectionString = string.Empty;
             }
             return connectionString;
         }
@@ -132,9 +133,9 @@ namespace Server.Models
                 valueQuery = valueQuery + value;
                 valueQuery = valueQuery + ",";
             }
-            valueQuery.TrimEnd(',');
+            valueQuery = valueQuery.TrimEnd(',');
 
-            string query = string.Format("INSERT INTO {0} ({1}) VALUES ({2})", tableName, columnQuery, valueQuery);
+            string query = string.Format("INSERT INTO {0} ({1}) VALUES ({2});", tableName, columnQuery, valueQuery);
 
             StaticDBConnector.command.CommandType = CommandType.Text;
             StaticDBConnector.command.CommandText = query;
@@ -176,7 +177,7 @@ namespace Server.Models
 
         public static void Delete(string tableName, string whereClause)
         {
-            string query = string.Format("DELETE FROM {0} WHERE {1}", tableName, whereClause);
+            string query = string.Format("DELETE FROM {0} WHERE {1};", tableName, whereClause);
 
             StaticDBConnector.command.CommandType = CommandType.Text;
             StaticDBConnector.command.CommandText = query;

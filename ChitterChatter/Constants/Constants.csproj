@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ServerResponseCodes.cs" />
+    <Compile Include="Models\MessageConstants.cs" />
     <Compile Include="Models\UserConstants.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
