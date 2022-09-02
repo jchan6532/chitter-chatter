@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:Client"
         Loaded="Window_Loaded"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow"
+        Height="450"
+        Width="800">
     <Grid>
 
         <TreeView
@@ -26,11 +28,13 @@
                                     Orientation="Horizontal"
                                     >
                                     <Image
-                                        Source="Images/drive.png" 
+                                        Source="{Binding 
+                                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeViewItem}}, 
+                                        Path=Tag}" 
                                         Width="20"
                                         Margin="3"
                                         />
-                                    
+
                                     <TextBlock
                                         Text="{Binding}"
                                         VerticalAlignment="Center"
