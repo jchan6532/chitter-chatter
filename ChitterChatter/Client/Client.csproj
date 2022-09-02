@@ -105,6 +105,10 @@
       <Project>{cac81a1f-d50d-4b14-a59a-bf58ca2f755f}</Project>
       <Name>Constants</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TCPHelpers\TCPHelpers.csproj">
+      <Project>{a29f2b71-a88f-473e-b01f-194bb2214faa}</Project>
+      <Name>TCPHelpers</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
