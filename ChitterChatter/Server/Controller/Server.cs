@@ -8,6 +8,7 @@ using System.Net;
 using System.Configuration;
 
 using Server.Models;
+using Server.Exceptions;
 
 namespace Server.Controller
 {
@@ -24,8 +25,13 @@ namespace Server.Controller
 
         public Server()
         {
+            if (!Logger.CheckLogFile())
+            {
+                throw new LogFileNotExistException("log file does not exist");
+            }
             try
             {
+                Logger.ClearLogFile();
                 Logger.Log("Server initiating", "ACTION");
 
                 this.iPAddress = IPAddress.Parse(ConfigurationManager.AppSettings.Get("LocalIP"));

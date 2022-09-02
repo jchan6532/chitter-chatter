@@ -28,12 +28,50 @@ namespace Server.Controller
                 {
                     File.AppendAllText(Logger.LogFileName, $"{Logger.LogTime.ToString()} :\n{messageXML}\n\n");
                 }
+                catch (UnauthorizedAccessException uae)
+                {
+                    Console.WriteLine(uae.Message);
+                    throw uae;
+                }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
+                    throw e;
                 }
             }
+        }
 
+        public static void ClearLogFile()
+        {
+            if (File.Exists(Logger.LogFileName))
+            {
+                try
+                {
+                    File.WriteAllText(Logger.LogFileName, string.Empty);
+                }
+                catch (UnauthorizedAccessException uae)
+                {
+                    Console.WriteLine(uae.Message);
+                    throw uae;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw e;
+                }
+            }
+        }
+
+        public static bool CheckLogFile()
+        {
+            if (File.Exists(Logger.LogFileName))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
