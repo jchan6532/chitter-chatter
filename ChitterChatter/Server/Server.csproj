@@ -92,6 +92,7 @@
     <Compile Include="Controller\Logger.cs" />
     <Compile Include="Controller\Server.cs" />
     <Compile Include="Exceptions\LogFileNotExistException.cs" />
+    <Compile Include="Models\Chat.cs" />
     <Compile Include="Models\Mesagage.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\StaticDBConnector.cs" />
