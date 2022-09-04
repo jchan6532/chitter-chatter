@@ -32,6 +32,7 @@ namespace Client
         {
             InitializeComponent();
 
+            #region comments
             //try
             //{
             //    ViewModels.Client client = new ViewModels.Client();
@@ -42,6 +43,7 @@ namespace Client
             //    MessageBox.Show(e.Message);
             //    this.Close();
             //}
+            #endregion
         }
 
         #endregion
@@ -55,20 +57,40 @@ namespace Client
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // Get every logical drive
             foreach (var drive in Directory.GetLogicalDrives())
             {
+                // Create a new item for each logical drive
                 var item = new TreeViewItem();
+
+                // Set the header and path
                 item.Header = drive;
                 item.Tag = drive;
+
+                // Add a dummy item
                 item.Items.Add(null);
+
+                // Listen out for item being expanded
                 item.Expanded += Folder_Expanded;
+
+                // Add it to the main tree view
                 this.FolderView.Items.Add(item);
             }
         }
 
         private void Folder_Expanded(object sender, RoutedEventArgs e)
         {
-            var item = (TreeViewItem)sender;
+            TreeViewItem item = (TreeViewItem)sender;
+
+            // If the item only contains dummy data/item
+            if (item.Items.Count != 1 || item.Items[0] != null)
+                return;
+
+            // Clear the dummy item
+            item.Items.Clear();
+
+            string folderName = (string)item.Tag;
+
             
             throw new NotImplementedException();
         }
