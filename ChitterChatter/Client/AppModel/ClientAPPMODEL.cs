@@ -10,9 +10,9 @@ using System.Configuration;
 using Client.Models;
 using Client.Services;
 
-namespace Client.ViewModels
+namespace Client.AppModel
 {
-    public class Client
+    public class ClientAPPMODEL
     {
         public string enteredUserName;
         public string enteredPassword;
@@ -24,7 +24,7 @@ namespace Client.ViewModels
 
         public volatile bool done;
 
-        public Client()
+        public ClientAPPMODEL()
         {
             this.enteredPassword = string.Empty;
             this.enteredUserName = string.Empty;
