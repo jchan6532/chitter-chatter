@@ -17,7 +17,8 @@ namespace Client.AppModel
         public string enteredUserName;
         public string enteredPassword;
 
-        public Dictionary<int, Message> messages;
+        public Dictionary<int, Message> AllMessagesHistory;
+        public Dictionary<int, Message> IncomingMessages;
 
         public TcpClient client;
         public NetworkStream stream;
@@ -28,7 +29,7 @@ namespace Client.AppModel
         {
             this.enteredPassword = string.Empty;
             this.enteredUserName = string.Empty;
-            this.messages = new Dictionary<int, Message>();
+            this.AllMessagesHistory = new Dictionary<int, Message>();
             this.client = null;
             this.stream = null;
             this.done = false;
