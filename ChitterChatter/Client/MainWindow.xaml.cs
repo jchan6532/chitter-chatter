@@ -76,6 +76,11 @@ namespace Client
 
         #region Folder Expanded
 
+        /// <summary>
+        /// When a folder is expanded, find the sub folders/files
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void Folder_Expanded(object sender, RoutedEventArgs e)
         {
             #region Initial Checks
@@ -169,6 +174,8 @@ namespace Client
 
         #endregion
 
+        #region Helpers
+
         /// <summary>
         /// Find the file/folder name
         /// </summary>
@@ -192,5 +199,7 @@ namespace Client
 
             return path.Substring(lastIndex+1);
         }
+
+        #endregion
     }
 }

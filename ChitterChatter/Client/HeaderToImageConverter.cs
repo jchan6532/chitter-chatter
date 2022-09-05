@@ -12,6 +12,7 @@ namespace Client
     public class HeaderToImageConverter : IValueConverter
     {
         public static HeaderToImageConverter Instance = new HeaderToImageConverter();
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return new object();
