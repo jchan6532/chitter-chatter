@@ -57,6 +57,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppModel\ClientAPPMODEL.cs" />
+    <Compile Include="Directory\Data\DirectoryItem.cs" />
+    <Compile Include="Directory\Data\DirectoryItemType.cs" />
+    <Compile Include="Directory\DirectoryStructure.cs" />
+    <Compile Include="Directory\ViewModels\BaseViewModel.cs" />
+    <Compile Include="Directory\ViewModels\DirectoryItemViewModel.cs" />
     <Compile Include="HeaderToImageConverter.cs" />
     <Compile Include="Models\Chat.cs" />
     <Compile Include="Models\Message.cs" />

@@ -4,30 +4,30 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
-        Loaded="Window_Loaded"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="450"
         Width="800">
-    <Grid>
 
-        <TreeView
+        <Grid>
+
+            <TreeView
             x:Name="FolderView"
             >
-            <TreeView.Resources>
-                
-                <Style 
+                <TreeView.Resources>
+
+                    <Style 
                     TargetType="{x:Type TreeViewItem}"
                     >
-                    <Setter
+                        <Setter
                         Property="HeaderTemplate"
                         >
-                        <Setter.Value>
-                            <DataTemplate>
-                                <StackPanel
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <StackPanel
                                     Orientation="Horizontal"
                                     >
-                                    <Image
+                                        <Image
                                         Source="{Binding 
                                         RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeViewItem}}, 
                                         Path=Tag,
@@ -36,19 +36,20 @@
                                         Margin="3"
                                         />
 
-                                    <TextBlock
+                                        <TextBlock
                                         Text="{Binding}"
                                         VerticalAlignment="Center"
                                         MinWidth="100"
                                         />
-                                </StackPanel>
-                            </DataTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-                
-            </TreeView.Resources>
-        </TreeView>
-        
-    </Grid>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+
+                </TreeView.Resources>
+            </TreeView>
+
+        </Grid>
+
 </Window>
