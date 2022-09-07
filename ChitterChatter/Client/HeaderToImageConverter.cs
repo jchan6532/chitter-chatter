@@ -4,6 +4,8 @@ using System.IO;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
+using Client.Directory;
+
 namespace Client
 {
     /// <summary>
@@ -24,7 +26,7 @@ namespace Client
                 return null;
 
             // Get the name of the file/folder
-            string name = MainWindow.GetFileFolderName(path);
+            string name = DirectoryStructure.GetFileFolderName(path);
 
             // By default, we presume an image
             string image = "Images/file.png";
