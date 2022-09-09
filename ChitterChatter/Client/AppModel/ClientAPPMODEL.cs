@@ -8,7 +8,6 @@ using System.Net;
 using System.Configuration;
 
 using Client.Models;
-using Client.Services;
 
 namespace Client.AppModel
 {

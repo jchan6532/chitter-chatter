@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseClasses\Client\BaseViewModel.cs" />
+    <Compile Include="BaseClasses\Client\RelayCommand.cs" />
     <Compile Include="RequestObj.cs" />
     <Compile Include="ResponseObj.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

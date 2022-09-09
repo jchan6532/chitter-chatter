@@ -5,51 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
-        Title="MainWindow"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        
+        Icon="Images/Logos/logo-small.png"
+        Title="Chitter Chatter Chat"
         Height="450"
         Width="800">
 
-        <Grid>
+    <Grid>
 
-            <TreeView
-            x:Name="FolderView"
-            >
-                <TreeView.Resources>
+        
 
-                    <Style 
-                    TargetType="{x:Type TreeViewItem}"
-                    >
-                        <Setter
-                        Property="HeaderTemplate"
-                        >
-                            <Setter.Value>
-                                <DataTemplate>
-                                    <StackPanel
-                                    Orientation="Horizontal"
-                                    >
-                                        <Image
-                                        Source="{Binding 
-                                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeViewItem}}, 
-                                        Path=Tag,
-                                        Converter={x:Static local:HeaderToImageConverter.Instance}}"
-                                        Width="20"
-                                        Margin="3"
-                                        />
-
-                                        <TextBlock
-                                        Text="{Binding}"
-                                        VerticalAlignment="Center"
-                                        MinWidth="100"
-                                        />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-
-                </TreeView.Resources>
-            </TreeView>
-
-        </Grid>
+    </Grid>
 
 </Window>

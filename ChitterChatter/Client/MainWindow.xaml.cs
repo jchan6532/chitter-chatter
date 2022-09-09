@@ -7,8 +7,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.IO;
 
-using Client.Services;
-
 namespace Client
 {
     /// <summary>
@@ -24,7 +22,8 @@ namespace Client
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext
+
+            
 
             #region comments
             //try
