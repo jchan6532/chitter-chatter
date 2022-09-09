@@ -10,25 +10,26 @@ using System.Configuration;
 using Client.Models;
 using Client.Services;
 
-namespace Client.ViewModels
+namespace Client.AppModel
 {
-    public class Client
+    public class ClientAPPMODEL
     {
         public string enteredUserName;
         public string enteredPassword;
 
-        public Dictionary<int, Message> messages;
+        public Dictionary<int, Message> AllMessagesHistory;
+        public Dictionary<int, Message> IncomingMessages;
 
         public TcpClient client;
         public NetworkStream stream;
 
         public volatile bool done;
 
-        public Client()
+        public ClientAPPMODEL()
         {
             this.enteredPassword = string.Empty;
             this.enteredUserName = string.Empty;
-            this.messages = new Dictionary<int, Message>();
+            this.AllMessagesHistory = new Dictionary<int, Message>();
             this.client = null;
             this.stream = null;
             this.done = false;
