@@ -7,6 +7,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.IO;
 
+using Client.ViewModels;
+
 namespace Client
 {
     /// <summary>
@@ -22,8 +24,7 @@ namespace Client
         public MainWindow()
         {
             InitializeComponent();
-
-            
+            this.DataContext = new WindowViewModel(this);
 
             #region comments
             //try
