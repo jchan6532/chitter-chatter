@@ -25,19 +25,6 @@ namespace Client
         {
             InitializeComponent();
             this.DataContext = new WindowViewModel(this);
-
-            #region comments
-            //try
-            //{
-            //    ViewModels.Client client = new ViewModels.Client();
-            //}
-            //catch (Exception e)
-            //{
-            //    LoggingService.Log(e.Message, "EXCEPTION");
-            //    MessageBox.Show(e.Message);
-            //    this.Close();
-            //}
-            #endregion
         }
 
         #endregion

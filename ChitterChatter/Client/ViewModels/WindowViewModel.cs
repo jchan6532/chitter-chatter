@@ -2,6 +2,7 @@
 using System;
 
 using TCPHelpers.BaseClasses.Client;
+using Client.AppModel;
 
 namespace Client.ViewModels
 {
@@ -11,6 +12,11 @@ namespace Client.ViewModels
     public class WindowViewModel : BaseViewModel
     {
         #region Private Members
+
+        /// <summary>
+        /// The client inside the window view model
+        /// </summary>
+        private ClientAPPMODEL mClient = null;
 
         /// <summary>
         /// The window this view model controls
@@ -55,7 +61,7 @@ namespace Client.ViewModels
         }
 
         /// <summary>
-        /// 
+        /// The size of the resize border around the window
         /// </summary>
         public Thickness ResizeBorderThickness
         {
@@ -66,7 +72,7 @@ namespace Client.ViewModels
         }
         #endregion
 
-        #region Outer margin size and thickness properties
+        #region Resize Border and thickness properties
         /// <summary>
         /// The margin around the window to allow for a drop shadow
         /// </summary>
@@ -86,10 +92,23 @@ namespace Client.ViewModels
             set
             {
                 this.mOuterMarginSize = value;
+                base.NotifyPropertyChanged();
             }
+        }
+
+        /// <summary>
+        /// The margin around the window to allow for a drop shadow
+        /// </summary>
+        public Thickness OuterMarginThickness 
+        {
+            get
+            {
+                return new Thickness(this.OuterMarginSize);
+            } 
         }
         #endregion
 
+        #region Window and corner radius
         /// <summary>
         /// The radius of the edges of the window
         /// </summary>
@@ -112,6 +131,18 @@ namespace Client.ViewModels
             }
         }
 
+        /// <summary>
+        /// The radius of the edges of the window
+        /// </summary>
+        public CornerRadius WindowCornerRadius 
+        { 
+            get 
+            { 
+                return new CornerRadius(this.WindowRadius);
+            }
+        }
+        #endregion
+
         #endregion
 
 
@@ -124,7 +155,13 @@ namespace Client.ViewModels
         {
             this.mWindow = window;
 
-            this.ResizeBorder = 6;
+            // Listen out for the window resizing
+            this.mWindow.StateChanged += (sender, e) =>
+            {
+
+            };
+
+            this.mClient = new ClientAPPMODEL();
         }
 
         #endregion
