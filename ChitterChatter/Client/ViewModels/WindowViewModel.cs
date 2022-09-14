@@ -38,6 +38,11 @@ namespace Client.ViewModels
         /// </summary>
         private int mWindowRadius = 10;
 
+        /// <summary>
+        /// The height of the title bar  / caption of the window
+        /// </summary>
+        private int mTitleHeight = 42;
+
         #endregion
 
 
@@ -61,18 +66,18 @@ namespace Client.ViewModels
         }
 
         /// <summary>
-        /// The size of the resize border around the window
+        /// The size of the resize border around the window, taking into account the outer margin
         /// </summary>
         public Thickness ResizeBorderThickness
         {
             get
             {
-                return new Thickness(this.ResizeBorder);
+                return new Thickness(this.ResizeBorder + this.OuterMarginSize);
             }
         }
         #endregion
 
-        #region Resize Border and thickness properties
+        #region Outer margin size and thickness properties
         /// <summary>
         /// The margin around the window to allow for a drop shadow
         /// </summary>
@@ -134,11 +139,40 @@ namespace Client.ViewModels
         /// <summary>
         /// The radius of the edges of the window
         /// </summary>
-        public CornerRadius WindowCornerRadius 
+        public CornerRadius WindowCornerRadius
         { 
             get 
             { 
                 return new CornerRadius(this.WindowRadius);
+            }
+        }
+        #endregion
+
+        #region Title height
+        /// <summary>
+        /// The height of the title bar  / caption of the window
+        /// </summary>
+        public int TitleHeight 
+        {
+            get
+            {
+                return this.mTitleHeight;
+            }
+            set
+            {
+                this.mTitleHeight = value;
+                base.NotifyPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public GridLength TitleHeightGridLength 
+        {
+            get
+            {
+                return new GridLength(this.TitleHeight + this.ResizeBorder);
             }
         }
         #endregion
@@ -158,7 +192,12 @@ namespace Client.ViewModels
             // Listen out for the window resizing
             this.mWindow.StateChanged += (sender, e) =>
             {
-
+                // Fire off events for all properties that are affected by a resize
+                base.NotifyPropertyChanged(nameof(this.ResizeBorderThickness));
+                base.NotifyPropertyChanged(nameof(this.OuterMarginSize));
+                base.NotifyPropertyChanged(nameof(this.OuterMarginThickness));
+                base.NotifyPropertyChanged(nameof(this.WindowRadius));
+                base.NotifyPropertyChanged(nameof(this.WindowCornerRadius));
             };
 
             this.mClient = new ClientAPPMODEL();
