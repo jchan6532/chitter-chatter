@@ -33,6 +33,16 @@ namespace TCPHelpers.BaseClasses.Client
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        /// <summary>
+        /// Duplicate property changed event method
+        /// </summary>
+        /// <param name="name">property name</param>
+        public void OnPropertyChanged(String name = "")
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(name));
+        }
+
+
         #endregion
     }
 }
