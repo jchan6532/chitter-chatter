@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using System;
+using System.Windows.Input;
+using System.Runtime.InteropServices;
 
 using TCPHelpers.BaseClasses.Client;
 using Client.AppModel;
@@ -180,6 +182,31 @@ namespace Client.ViewModels
         #endregion
 
 
+        #region Commands
+
+        /// <summary>
+        /// The command to minimize the window
+        /// </summary>
+        public ICommand MinimizeCommand { get; set; }
+
+        /// <summary>
+        /// The command to maximize the window
+        /// </summary>
+        public ICommand MaximizeCommand { get; set; }
+
+        /// <summary>
+        /// The command to close the window
+        /// </summary>
+        public ICommand CloseCommand { get; set; }
+
+        /// <summary>
+        /// The command to show the system menu of the window
+        /// </summary>
+        public ICommand MenuCommand { get; set; }
+
+        #endregion
+
+
         #region Constructor
 
         /// <summary>
@@ -200,7 +227,43 @@ namespace Client.ViewModels
                 base.NotifyPropertyChanged(nameof(this.WindowCornerRadius));
             };
 
+            // Create commands
+            this.MinimizeCommand = new RelayCommand(() => this.mWindow.WindowState = WindowState.Minimized);
+            this.MaximizeCommand = new RelayCommand(() => 
+            {
+                if (this.mWindow.WindowState == WindowState.Maximized)
+                {
+                    this.mWindow.WindowState = WindowState.Normal;
+                }
+                else if (this.mWindow.WindowState == WindowState.Normal)
+                {
+                    this.mWindow.WindowState = WindowState.Maximized;
+                }
+            });
+            this.CloseCommand = new RelayCommand(() => this.mWindow.Close());
+            this.MenuCommand = new RelayCommand(() => SystemCommands.ShowSystemMenu(this.mWindow, this.GetMousePosition()));
+
             this.mClient = new ClientAPPMODEL();
+        }
+
+        #endregion
+
+
+        #region Private Helpers
+
+        /// <summary>
+        /// Gets the current mouse position on the screen
+        /// </summary>
+        /// <returns></returns>
+        private Point GetMousePosition()
+        {
+            return this.mWindow.PointToScreen(Mouse.GetPosition(this.mWindow));
+
+            // Position of the mouse relative to the window
+            var position = Mouse.GetPosition(this.mWindow);
+
+            // Add the window position so its a "ToScreen"
+            return new Point(position.X + this.mWindow.Left, position.Y + this.mWindow.Top);
         }
 
         #endregion
