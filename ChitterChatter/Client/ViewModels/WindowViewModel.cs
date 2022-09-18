@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 
 using TCPHelpers.BaseClasses.Client;
 using Client.AppModel;
+using Client.WindowResizer;
 
 namespace Client.ViewModels
 {
@@ -24,6 +25,8 @@ namespace Client.ViewModels
         /// The window this view model controls
         /// </summary>
         private Window mWindow = null;
+
+        private WindowResizer.WindowResizer mWindowResizer = null;
 
         /// <summary>
         /// The size of the resize border around the window
@@ -78,6 +81,17 @@ namespace Client.ViewModels
             }
         }
         #endregion
+
+        /// <summary>
+        /// The padding if the inner content of the main window
+        /// </summary>
+        public Thickness InnerContentPadding
+        { 
+            get 
+            { 
+                return new Thickness(this.mResizeBorder); 
+            }
+        }
 
         #region Outer margin size and thickness properties
         /// <summary>
@@ -179,6 +193,16 @@ namespace Client.ViewModels
         }
         #endregion
 
+        /// <summary>
+        /// The smallest width the window can go to
+        /// </summary>
+        public double WindowMinimumWidth { get; set; } = 400;
+
+        /// <summary>
+        /// The smallest height the window can go to
+        /// </summary>
+        public double WindowMinimumHeight { get; set; } = 400;
+
         #endregion
 
 
@@ -242,6 +266,9 @@ namespace Client.ViewModels
             });
             this.CloseCommand = new RelayCommand(() => this.mWindow.Close());
             this.MenuCommand = new RelayCommand(() => SystemCommands.ShowSystemMenu(this.mWindow, this.GetMousePosition()));
+
+            // Fix the window resize issue
+            this.mWindowResizer = new WindowResizer.WindowResizer(this.mWindow);
 
             this.mClient = new ClientAPPMODEL();
         }
