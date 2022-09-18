@@ -48,6 +48,11 @@ namespace Client.ViewModels
         /// </summary>
         private int mTitleHeight = 42;
 
+        /// <summary>
+        /// The maximize icon
+        /// </summary>
+        private string mMaximizeIcon = "▯";
+
         #endregion
 
 
@@ -203,6 +208,19 @@ namespace Client.ViewModels
         /// </summary>
         public double WindowMinimumHeight { get; set; } = 400;
 
+        public string MaximizeIcon 
+        {
+            get
+            {
+                return this.mMaximizeIcon;
+            }
+            set
+            {
+                this.mMaximizeIcon = value;
+                base.NotifyPropertyChanged();
+            }
+        }
+
         #endregion
 
 
@@ -255,13 +273,17 @@ namespace Client.ViewModels
             this.MinimizeCommand = new RelayCommand(() => this.mWindow.WindowState = WindowState.Minimized);
             this.MaximizeCommand = new RelayCommand(() => 
             {
+                // User went half screen
                 if (this.mWindow.WindowState == WindowState.Maximized)
                 {
                     this.mWindow.WindowState = WindowState.Normal;
+                    this.MaximizeIcon = "▯";
                 }
+                // User went full screen
                 else if (this.mWindow.WindowState == WindowState.Normal)
                 {
                     this.mWindow.WindowState = WindowState.Maximized;
+                    this.MaximizeIcon = "❐";
                 }
             });
             this.CloseCommand = new RelayCommand(() => this.mWindow.Close());
