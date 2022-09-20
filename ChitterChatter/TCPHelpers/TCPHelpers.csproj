@@ -31,8 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,10 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseClasses\Client\BaseValueConverter.cs" />
     <Compile Include="BaseClasses\Client\BaseViewModel.cs" />
     <Compile Include="BaseClasses\Client\RelayCommand.cs" />
-    <Compile Include="RequestObj.cs" />
-    <Compile Include="ResponseObj.cs" />
+    <Compile Include="TCPObjects\RequestObj.cs" />
+    <Compile Include="TCPObjects\ResponseObj.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Services\LoggerService.cs" />

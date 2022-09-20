@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using TCPHelpers.BaseClasses.Client;
 using Client.AppModel;
 using Client.WindowResizer;
+using Constants.Views;
 
 namespace Client.ViewModels
 {
@@ -26,6 +27,9 @@ namespace Client.ViewModels
         /// </summary>
         private Window mWindow = null;
 
+        /// <summary>
+        /// The window resizer to fix window resizing issues
+        /// </summary>
         private WindowResizer.WindowResizer mWindowResizer = null;
 
         /// <summary>
@@ -53,10 +57,45 @@ namespace Client.ViewModels
         /// </summary>
         private string mMaximizeIcon = "▯";
 
+        /// <summary>
+        /// The last known dock position
+        /// </summary>
+        private WindowDockPosition mDockPosition = WindowDockPosition.Undocked;
+
         #endregion
 
 
         #region Public Properties
+
+        #region Window minimum height and width
+        /// <summary>
+        /// The smallest width the window can go to
+        /// </summary>
+        public double WindowMinimumWidth { get; set; } = 400;
+
+        /// <summary>
+        /// The smallest height the window can go to
+        /// </summary>
+        public double WindowMinimumHeight { get; set; } = 400;
+        #endregion
+
+        /// <summary>
+        /// True if the window should be borderless because it is docked or maximized
+        /// </summary>
+        public bool Borderless 
+        {
+            get
+            {
+                if (this.mWindow.WindowState == WindowState.Maximized || this.mDockPosition != WindowDockPosition.Undocked)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
 
         #region Resize Border and thickness properties
         /// <summary>
@@ -66,12 +105,14 @@ namespace Client.ViewModels
         {
             get
             {
-                return this.mResizeBorder;
-            }
-            set
-            {
-                this.mResizeBorder = value;
-                base.NotifyPropertyChanged();
+                if (this.Borderless)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return this.mResizeBorder;
+                }
             }
         }
 
@@ -90,13 +131,7 @@ namespace Client.ViewModels
         /// <summary>
         /// The padding if the inner content of the main window
         /// </summary>
-        public Thickness InnerContentPadding
-        { 
-            get 
-            { 
-                return new Thickness(this.mResizeBorder); 
-            }
-        }
+        public Thickness InnerContentPadding { get; set; } = new Thickness(0);
 
         #region Outer margin size and thickness properties
         /// <summary>
@@ -106,7 +141,7 @@ namespace Client.ViewModels
         {
             get
             {
-                if (this.mWindow.WindowState == WindowState.Maximized)
+                if (this.Borderless)
                 {
                     return 0;
                 }
@@ -142,7 +177,7 @@ namespace Client.ViewModels
         {
             get
             {
-                if (this.mWindow.WindowState == WindowState.Maximized)
+                if (this.Borderless)
                 {
                     return 0;
                 }
@@ -154,6 +189,7 @@ namespace Client.ViewModels
             set
             {
                 this.mWindowRadius = value;
+                base.NotifyPropertyChanged();
             }
         }
 
@@ -199,15 +235,8 @@ namespace Client.ViewModels
         #endregion
 
         /// <summary>
-        /// The smallest width the window can go to
+        /// The maximize icon
         /// </summary>
-        public double WindowMinimumWidth { get; set; } = 400;
-
-        /// <summary>
-        /// The smallest height the window can go to
-        /// </summary>
-        public double WindowMinimumHeight { get; set; } = 400;
-
         public string MaximizeIcon 
         {
             get
@@ -220,6 +249,11 @@ namespace Client.ViewModels
                 base.NotifyPropertyChanged();
             }
         }
+
+        /// <summary>
+        /// The current page of the application
+        /// </summary>
+        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.Login;
 
         #endregion
 
@@ -291,8 +325,9 @@ namespace Client.ViewModels
 
             // Fix the window resize issue
             this.mWindowResizer = new WindowResizer.WindowResizer(this.mWindow);
-
+            
             this.mClient = new ClientAPPMODEL();
+;
         }
 
         #endregion
