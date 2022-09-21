@@ -96,7 +96,8 @@
                                         <!-- Title -->
                                         <Viewbox 
                                             Margin="0"
-                                            Grid.Column="1"
+                                            Grid.Column="0"
+                                            Grid.ColumnSpan="3"
                                             >
                                             <TextBlock
                                                 Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, 
