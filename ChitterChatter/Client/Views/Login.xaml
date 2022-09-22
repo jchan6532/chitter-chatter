@@ -7,9 +7,18 @@
       mc:Ignorable="d" 
       d:DesignHeight="450"
       d:DesignWidth="800"
-      Title="Login">
+      Title="Login"
+      Background="{StaticResource TitleBlueBrush}">
 
     <Grid>
-        <Button Content="test" />
+        <Grid.Background>
+            <ImageBrush
+            ImageSource="../Images/Backgrounds/emoji-background.png"
+            Stretch="Fill"
+            TileMode="Tile"
+            />
+        </Grid.Background>
+        
+        <Button Content="test" Margin="100"/>
     </Grid>
 </Page>
