@@ -95,7 +95,7 @@
 
                                         <!-- Title -->
                                         <Viewbox 
-                                            Margin="0"
+                                            Margin="5"
                                             Grid.Column="0"
                                             Grid.ColumnSpan="3"
                                             >
@@ -105,7 +105,9 @@
                                                     Path=Title, 
                                                     FallbackValue='Chitter Chatter'}"
                                                     Style="{StaticResource HeaderText}"
+                                                    FontFamily="{StaticResource LatoBold}"
                                                     FontSize="{StaticResource FontSizeLarge}"
+                                                    Margin="0 0 0 -5"
                                                     />
                                                 <TextBlock
                                                     Text="by Chinkalada"

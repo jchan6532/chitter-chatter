@@ -178,5 +178,8 @@
   <ItemGroup>
     <Resource Include="Images\Logos\139310.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Backgrounds\emoji-background.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
