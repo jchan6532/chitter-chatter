@@ -99,11 +99,21 @@
                                             Grid.Column="0"
                                             Grid.ColumnSpan="3"
                                             >
-                                            <TextBlock
-                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, 
-                                                Path=Title, 
-                                                FallbackValue='Chitter Chatter'}"
-                                                Style="{StaticResource HeaderText}"/>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock
+                                                    Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, 
+                                                    Path=Title, 
+                                                    FallbackValue='Chitter Chatter'}"
+                                                    Style="{StaticResource HeaderText}"
+                                                    FontSize="{StaticResource FontSizeLarge}"
+                                                    />
+                                                <TextBlock
+                                                    Text="by Chinkalada"
+                                                    Foreground="{StaticResource ForegroundDarkBrush}"
+                                                    TextAlignment="Center"
+                                                    FontSize="{StaticResource FontSizeSmall}"
+                                                    />
+                                            </StackPanel>
                                         </Viewbox>
 
                                         <!-- Window Buttons -->
