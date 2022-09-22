@@ -17,4 +17,26 @@
     <Color x:Key="ForegroundLight">#ffffff</Color>
     <SolidColorBrush x:Key="ForegroundLightBrush" Color="{StaticResource ForegroundLight}" />
 
+    <Color x:Key="ForegroundDark">#bdbdbd</Color>
+    <SolidColorBrush x:Key="ForegroundDarkBrush" Color="{StaticResource ForegroundDark}" />
+    
+    
+    <!-- Title Colours -->
+    
+    <!-- Blue -->
+    <Color x:Key="TitleBlue">#3099c5</Color>
+    <SolidColorBrush x:Key="TitleBlueBrush" Color="{StaticResource TitleBlue}" />
+
+    <!-- Orange -->
+    <Color x:Key="TitleOrange">#ffa800</Color>
+    <SolidColorBrush x:Key="TitleOrangeBrush" Color="{StaticResource TitleOrange}" />
+
+    <!-- Green -->
+    <Color x:Key="TitleGreen">#00c541</Color>
+    <SolidColorBrush x:Key="TitleGreenBrush" Color="{StaticResource TitleGreen}" />
+
+    <!-- Red -->
+    <Color x:Key="TitleRed">#ff4747</Color>
+    <SolidColorBrush x:Key="TitleRedBrush" Color="{StaticResource TitleRed}" />
+
 </ResourceDictionary>
