@@ -59,10 +59,10 @@
                             />
 
                         <!-- Email -->
-                        <TextBox/>
+                        <TextBox Tag="Email"/>
 
                         <!-- Password -->
-                        <TextBox/>
+                        <TextBox Tag="Password"/>
 
                         <!-- Next button -->
                         <Button
@@ -73,7 +73,11 @@
                     </StackPanel>
                 </Border>
 
-                <Button Content="I already have an account" HorizontalAlignment="Center"/>
+                <Button 
+                    Content="I already have an account"
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource TextButton}"
+                    />
             </StackPanel>
         </ScrollViewer>
     </Grid>
