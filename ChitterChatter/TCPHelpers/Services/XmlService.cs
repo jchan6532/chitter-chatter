@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Constants
+namespace TCPHelpers.Services
 {
-    class Program
+    class XmlService
     {
-        static void Main(string[] args)
-        {
-        }
     }
 }

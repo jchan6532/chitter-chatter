@@ -92,6 +92,7 @@
     <Compile Include="Controller\Logger.cs" />
     <Compile Include="Controller\Server.cs" />
     <Compile Include="Exceptions\LogFileNotExistException.cs" />
+    <Compile Include="Models\Chat.cs" />
     <Compile Include="Models\Mesagage.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\StaticDBConnector.cs" />
@@ -104,11 +105,14 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Constants\Constants.csproj">
-      <Project>{cac81a1f-d50d-4b14-a59a-bf58ca2f755f}</Project>
+      <Project>{9efb7e4c-75de-43da-b057-a8f7ca8923e9}</Project>
       <Name>Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TCPHelpers\TCPHelpers.csproj">
+      <Project>{a29f2b71-a88f-473e-b01f-194bb2214faa}</Project>
+      <Name>TCPHelpers</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
