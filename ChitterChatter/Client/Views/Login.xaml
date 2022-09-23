@@ -56,13 +56,14 @@
                             Text="It's about to get chattery"
                             FontSize="{StaticResource FontSizeRegular}"
                             Foreground="{StaticResource ForegroundDarkBrush}"
+                            Margin="0 0 0 20"
                             />
 
                         <!-- Email -->
                         <TextBox Tag="Email"/>
 
                         <!-- Password -->
-                        <TextBox Tag="Password"/>
+                        <PasswordBox Tag="Password" Margin="0 0 0 30"/>
 
                         <!-- Next button -->
                         <Button

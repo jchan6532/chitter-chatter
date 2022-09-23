@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Client.ViewModels;
+
 namespace Client.Views
 {
     /// <summary>
@@ -23,6 +25,7 @@ namespace Client.Views
         public Login()
         {
             InitializeComponent();
+            this.DataContext = new LoginViewModel();
         }
     }
 }
