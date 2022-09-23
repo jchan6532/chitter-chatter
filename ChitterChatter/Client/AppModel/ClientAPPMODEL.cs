@@ -8,37 +8,52 @@ using System.Net;
 using System.Configuration;
 
 using Client.Models;
-using Client.Services;
 
 namespace Client.AppModel
 {
     public class ClientAPPMODEL
     {
-        public string enteredUserName;
-        public string enteredPassword;
+        #region Public Properties
+
+        public string EnteredUsername { get; set; }
+        public string EnteredPassword { get; set; }
 
         public Dictionary<int, Message> AllMessagesHistory;
         public Dictionary<int, Message> IncomingMessages;
 
-        public TcpClient client;
-        public NetworkStream stream;
+        public TcpClient TcpClient;
+        public NetworkStream Stream;
 
         public volatile bool done;
 
+        #endregion
+
+
+        #region Constructor
+
+        /// <summary>
+        /// Default constructor, Initializes a new instance of the <see cref="ClientAPPMODEL"/> class.
+        /// </summary>
         public ClientAPPMODEL()
         {
-            this.enteredPassword = string.Empty;
-            this.enteredUserName = string.Empty;
+            this.EnteredPassword = string.Empty;
+            this.EnteredUsername = string.Empty;
             this.AllMessagesHistory = new Dictionary<int, Message>();
-            this.client = null;
-            this.stream = null;
+            this.IncomingMessages = new Dictionary<int, Message>();
+            this.TcpClient = null;
+            this.Stream = null;
             this.done = false;
         }
 
+        #endregion
+
+
+        #region Public Methods
+
         public void Connect(string userName, string password)
         {
-            this.enteredUserName = userName;
-            this.enteredPassword = password;
+            this.EnteredUsername = userName;
+            this.EnteredPassword = password;
 
             try
             {
@@ -49,8 +64,8 @@ namespace Client.AppModel
                     throw new Exception("Remote Port is invalid");
                 }
 
-                this.client = new TcpClient(host, port);
-                this.stream = this.client.GetStream();
+                this.TcpClient = new TcpClient(host, port);
+                this.Stream = this.TcpClient.GetStream();
             }
             catch (Exception e)
             {
@@ -61,10 +76,12 @@ namespace Client.AppModel
         public void Diconnect()
         {
             this.done = true;
-            this.stream.Close();
-            this.stream = null;
-            this.client.Close();
-            this.client = null;
+            this.Stream.Close();
+            this.Stream = null;
+            this.TcpClient.Close();
+            this.TcpClient = null;
         }
+
+        #endregion
     }
 }
