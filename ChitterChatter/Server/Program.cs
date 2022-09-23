@@ -7,7 +7,8 @@ using System.Xml.Linq;
 
 using Server.Controller;
 using Server.Models;
-using Server.Exceptions;
+using TCPHelpers.Exceptions;
+using TCPHelpers.Services;
 
 namespace Server
 {
@@ -32,11 +33,11 @@ namespace Server
             {
                 if (EXCEPTION.InnerException == null)
                 {
-                    Logger.Log(EXCEPTION.Message, nameof(EXCEPTION));
+                    LoggerService.Log(EXCEPTION.Message, nameof(EXCEPTION));
                 }
                 else
                 {
-                    Logger.Log(EXCEPTION.Message, nameof(EXCEPTION.InnerException));
+                    LoggerService.Log(EXCEPTION.Message, nameof(EXCEPTION.InnerException));
                 }
             }
         }

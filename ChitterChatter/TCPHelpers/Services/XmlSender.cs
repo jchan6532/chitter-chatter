@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.View
+namespace TCPHelpers.Services
 {
-    class StaticViewRenderer
+    public static class XmlSender
     {
+
     }
 }

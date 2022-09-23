@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.Exceptions
+namespace TCPHelpers.Exceptions
 {
     public class LogFileNotExistException : Exception
     {

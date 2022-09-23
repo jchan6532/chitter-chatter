@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +47,8 @@
     <Compile Include="BaseClasses\Client\BaseValueConverter.cs" />
     <Compile Include="BaseClasses\Client\BaseViewModel.cs" />
     <Compile Include="BaseClasses\Client\RelayCommand.cs" />
+    <Compile Include="Exceptions\LogFileNotExistException.cs" />
+    <Compile Include="Services\XmlSender.cs" />
     <Compile Include="TCPObjects\RequestObj.cs" />
     <Compile Include="TCPObjects\ResponseObj.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

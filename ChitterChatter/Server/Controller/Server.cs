@@ -8,12 +8,15 @@ using System.Net;
 using System.Configuration;
 
 using Server.Models;
-using Server.Exceptions;
+using TCPHelpers.Exceptions;
+using TCPHelpers.Services;
 
 namespace Server.Controller
 {
     public class Server
     {
+        #region Public Properties
+
         public TcpListener listener;
         public IPAddress iPAddress;
         public int port;
@@ -23,16 +26,25 @@ namespace Server.Controller
         public Dictionary<int, Mesagage> messages;
         public volatile bool done;
 
+        #endregion
+
+
+        #region Constructor
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Server"/> class.
+        /// </summary>
+        /// <exception cref="Server.Exceptions.LogFileNotExistException">log file does not exist</exception>
         public Server()
         {
-            if (!Logger.CheckLogFile())
+            if (!LoggerService.CheckLogFile())
             {
                 throw new LogFileNotExistException("log file does not exist");
             }
             try
             {
-                Logger.ClearLogFile();
-                Logger.Log("Server initiating", "ACTION");
+                LoggerService.ClearLogFile();
+                LoggerService.Log("Server initiating", "ACTION");
 
                 this.iPAddress = IPAddress.Parse(ConfigurationManager.AppSettings.Get("LocalIP"));
                 this.port = Int32.Parse(ConfigurationManager.AppSettings.Get("LocalPort"));
@@ -61,17 +73,26 @@ namespace Server.Controller
             }
             catch (Exception e)
             {
-                Logger.Log(e.Message, "EXCEPTION");
+                LoggerService.Log(e.Message, "EXCEPTION");
             }
 
 
             this.done = false;
         }
+
+        #endregion
+
+
+        #region Public methods
+
+        /// <summary>
+        /// Starts this instance.
+        /// </summary>
         public void Start()
         {
             try
             {
-                Logger.Log("Server starting", "ACTION");
+                LoggerService.Log("Server starting", "ACTION");
 
                 this.listener.Start();
                 while (this.done == false)
@@ -91,11 +112,17 @@ namespace Server.Controller
             }
         }
 
+        /// <summary>
+        /// Handles the client.
+        /// </summary>
+        /// <param name="obj">The object.</param>
         public void HandleClient(object obj)
         {
             TcpClient client = (TcpClient)obj;
             User user = new User();
             user.stream = client.GetStream();
         }
+
+        #endregion
     }
 }
