@@ -81,6 +81,7 @@
     </ApplicationDefinition>
     <Compile Include="AppModel\ClientAPPMODEL.cs" />
     <Compile Include="ValueConverters\ApplicationPageValueConverter.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>

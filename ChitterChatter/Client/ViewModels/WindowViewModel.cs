@@ -13,6 +13,7 @@ namespace Client.ViewModels
     /// <summary>
     /// The View Model for the custom flat window
     /// </summary>
+    /// <seealso cref="TCPHelpers.BaseClasses.Client.BaseViewModel" />
     public class WindowViewModel : BaseViewModel
     {
         #region Private Members
@@ -66,6 +67,8 @@ namespace Client.ViewModels
 
 
         #region Public Properties
+
+        public ClientAPPMODEL Client { get; }
 
         #region Window minimum height and width
         /// <summary>
@@ -295,12 +298,7 @@ namespace Client.ViewModels
             // Listen out for the window resizing
             this.mWindow.StateChanged += (sender, e) =>
             {
-                // Fire off events for all properties that are affected by a resize
-                base.NotifyPropertyChanged(nameof(this.ResizeBorderThickness));
-                base.NotifyPropertyChanged(nameof(this.OuterMarginSize));
-                base.NotifyPropertyChanged(nameof(this.OuterMarginThickness));
-                base.NotifyPropertyChanged(nameof(this.WindowRadius));
-                base.NotifyPropertyChanged(nameof(this.WindowCornerRadius));
+                this.WindowResized();
             };
 
             // Create commands
@@ -325,7 +323,16 @@ namespace Client.ViewModels
 
             // Fix the window resize issue
             this.mWindowResizer = new WindowResizer.WindowResizer(this.mWindow);
+            this.mWindowResizer.WindowDockChanged += (dock) =>
+            {
+                // Store last position
+                this.mDockPosition = dock;
+
+                // Fire off resize events
+                this.WindowResized();
+            };
             
+            // Set up the client to communicate with the server
             this.mClient = new ClientAPPMODEL();
 ;
         }
@@ -341,13 +348,22 @@ namespace Client.ViewModels
         /// <returns></returns>
         private Point GetMousePosition()
         {
-            return this.mWindow.PointToScreen(Mouse.GetPosition(this.mWindow));
-
             // Position of the mouse relative to the window
             var position = Mouse.GetPosition(this.mWindow);
 
             // Add the window position so its a "ToScreen"
             return new Point(position.X + this.mWindow.Left, position.Y + this.mWindow.Top);
+        }
+
+        private void WindowResized()
+        {
+            // Fire off events for all properties that are affected by a resize
+            base.NotifyPropertyChanged(nameof(this.Borderless));
+            base.NotifyPropertyChanged(nameof(this.ResizeBorderThickness));
+            base.NotifyPropertyChanged(nameof(this.OuterMarginSize));
+            base.NotifyPropertyChanged(nameof(this.OuterMarginThickness));
+            base.NotifyPropertyChanged(nameof(this.WindowRadius));
+            base.NotifyPropertyChanged(nameof(this.WindowCornerRadius));
         }
 
         #endregion
